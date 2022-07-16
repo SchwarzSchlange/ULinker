@@ -27,7 +27,7 @@ Still on development...😑
         }
     }
 
-    class TestClass
+    class TestClass // Test class to parse
     {
         public float a { get; set; }
         public float b { get; set; }
