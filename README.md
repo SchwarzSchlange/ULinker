@@ -12,7 +12,7 @@ Still on development...😑
 
   static void Main(string[] args)
   {
-            UBase mybase = UBase.FromPath(@"C:\Users\User\source\repos\ULinker\ULinker\bin\Debug\data.ulink"); // Create Database from directory
+            UBase mybase = UBase.FromPath(@"Your Path"); // Create Database from directory
 
             UParse<TestClass> parser = new UParse<TestClass>(); // Create a parser to parse database
 
@@ -36,4 +36,14 @@ Still on development...😑
     }
 
 
+```
+
+## Example ULink File
+``` ruby
+Date|Name of the Database|Password
+0.445|623.1|1
+0.895|901.34|6
+0.175|683.95|8
+0.2|0.5|-20.4
+-985.3|-3|9.453
 ```
