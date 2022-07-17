@@ -14,12 +14,13 @@ namespace Test
 
         static void Main(string[] args)
         {
-            UBase mybase = UBase.FromPath(@"C:\Users\User\Desktop\base.ulink"); // Create Database from directory
+            UBase mybase = UBase.FromPath(@"base.ulink"); // Create Database from directory
 
-            //USecurity.EncryptBase(mybase);
+            var en_base = USecurity.EncryptBase(mybase); // Protect the UBase into file named "en_base.DBNAME"
 
-            UBase enc_base = UBase.FromPath(@"C:\Users\User\source\repos\ULinker\Test\bin\Debug\My Base");
-            USecurity.DecryptBase(enc_base, "Im3h3o9d");
+            var de_base = USecurity.DecryptBase(en_base, en_base.Password); // Unprotect the returned protected data into "DE_RANDOMSERIAL"
+
+            Console.WriteLine(de_base.DBName + " " + de_base.CreateDate);
 
             Alert.Info("Program Finished...");
             Console.ReadLine();

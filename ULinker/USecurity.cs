@@ -27,31 +27,31 @@ namespace ULinker
         }
 
 
-        public static void EncryptBase(UBase Base)
+        public static UBase EncryptBase(UBase Base)
         {
             if(File.Exists(Base.Path))
             {
-                EncryptFile(Base);
+                return EncryptFile(Base);
             }
             else
             {
                 Alert.Error("Unable to encrpyt the base path does not exitst!");
-                return;
+                return null;
 
             }
 
         }
 
-        public static void DecryptBase(UBase Base,string Password)
+        public static UBase DecryptBase(UBase Base,string Password)
         {
             if (File.Exists(Base.Path))
             {
-                DecryptFile(Base,Password);
+                return DecryptFile(Base,Password);
             }
             else
             {
                 Alert.Error("Unable to decrpyt the base path does not exitst!");
-                return;
+                return null;
 
             }
         }
@@ -59,7 +59,7 @@ namespace ULinker
 
 
    
-        private static void EncryptFile(UBase Base)
+        private static UBase EncryptFile(UBase Base)
         {
 
             try
@@ -87,15 +87,18 @@ namespace ULinker
                 fsIn.Close();
                 cs.Close();
                 fsCrypt.Close();
+
+                return new UBase(Base.DBName, Base.Password, Base.CreateDate, Base.DBName);
             }
             catch(Exception ex)
             {
                 Alert.Error("Encrpytion failed!");
                 Alert.Info(ex.Message);
+                return null;
             }
         }
 
-        private static void DecryptFile(UBase Base,string password)
+        private static UBase DecryptFile(UBase Base,string password)
         {
 
 
@@ -110,7 +113,9 @@ namespace ULinker
                 RMCrypto.CreateDecryptor(key, key),
                 CryptoStreamMode.Read);
 
-            FileStream fsOut = new FileStream("DE_" + new Random().Next(5000,10000), FileMode.Create);
+            string name = "DE_" + new Random().Next(5000, 10000) + ".ulink";
+
+            FileStream fsOut = new FileStream(name, FileMode.Create);
 
             int data;
             while ((data = cs.ReadByte()) != -1)
@@ -119,6 +124,8 @@ namespace ULinker
             fsOut.Close();
             cs.Close();
             fsCrypt.Close();
+
+            return UBase.FromPath(name);
 
 
         }
