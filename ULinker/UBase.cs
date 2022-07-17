@@ -43,8 +43,8 @@ namespace ULinker
                 }
                 catch
                 {
-                    Alert.Error("The file could not be read please fix the format of the database.");
-                    return null;
+                    Alert.Warning("The file could not be read please fix the format of the database.");
+                    return new UBase("Unknown File","Unknown Password","Unknown Date", path);
                 }
 
             }

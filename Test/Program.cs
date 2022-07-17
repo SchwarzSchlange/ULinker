@@ -14,26 +14,16 @@ namespace Test
 
         static void Main(string[] args)
         {
-            UBase mybase = UBase.FromPath(@"C:\Users\User\source\repos\ULinker\ULinker\bin\Debug\data.ulink"); // Create Database from directory
+            UBase mybase = UBase.FromPath(@"C:\Users\User\Desktop\base.ulink"); // Create Database from directory
 
-            UParse<TestClass> parser = new UParse<TestClass>(); // Create a parser to parse database
+            //USecurity.EncryptBase(mybase);
 
-            var datas = parser.ParseFileAsClass(mybase); // Parse
+            UBase enc_base = UBase.FromPath(@"C:\Users\User\source\repos\ULinker\Test\bin\Debug\My Base");
+            USecurity.DecryptBase(enc_base, "Im3h3o9d");
 
-            foreach(TestClass test in datas)
-            {
-                Console.WriteLine(test.a * test.b / test.c); // Do a basic math process with the parsed values of each line
-            }
-
+            Alert.Info("Program Finished...");
             Console.ReadLine();
         }
     }
 
-    class TestClass
-    {
-        public float a { get; set; }
-        public float b { get; set; }
-        public float c { get; set; }
-
-    }
 }
